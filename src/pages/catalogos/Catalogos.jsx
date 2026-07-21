@@ -1,11 +1,12 @@
 import { Link, Routes, Route, useLocation } from 'react-router-dom'
 import Insumos from './Insumos'
 import Productos from './Productos'
+import Recetas from './Recetas'
 
 const secciones = [
   { nombre: 'Insumos', to: '/catalogos/insumos', listo: true },
   { nombre: 'Productos', to: '/catalogos/productos', listo: true },
-  { nombre: 'Recetas', to: '/catalogos/recetas', listo: false },
+  { nombre: 'Recetas', to: '/catalogos/recetas', listo: true },
 ]
 
 export default function Catalogos() {
@@ -44,6 +45,7 @@ export default function Catalogos() {
       <Routes>
         <Route path="insumos" element={<Insumos />} />
         <Route path="productos" element={<Productos />} />
+        <Route path="recetas" element={<Recetas />} />
       </Routes>
     </div>
   )
