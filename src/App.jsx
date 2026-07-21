@@ -34,7 +34,7 @@ export default function App() {
             <Route path="/gastos" element={<Gastos />} />
 
             <Route
-              path="/catalogos"
+              path="/catalogos/*"
               element={
                 <RutaProtegida soloAdmin>
                   <Catalogos />

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 
 export default function Dashboard() {
@@ -13,16 +14,16 @@ export default function Dashboard() {
       </p>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <TarjetaAcceso titulo="Compras" href="/compras" />
-        <TarjetaAcceso titulo="Producción" href="/produccion" />
-        <TarjetaAcceso titulo="Ventas" href="/ventas" />
-        <TarjetaAcceso titulo="Gastos" href="/gastos" />
+        <TarjetaAcceso titulo="Compras" to="/compras" />
+        <TarjetaAcceso titulo="Producción" to="/produccion" />
+        <TarjetaAcceso titulo="Ventas" to="/ventas" />
+        <TarjetaAcceso titulo="Gastos" to="/gastos" />
         {esAdmin && (
           <>
-            <TarjetaAcceso titulo="Catálogos" href="/catalogos" />
-            <TarjetaAcceso titulo="Finanzas" href="/finanzas" />
-            <TarjetaAcceso titulo="Recomendaciones" href="/finanzas/recomendaciones" />
-            <TarjetaAcceso titulo="Usuarios" href="/usuarios" />
+            <TarjetaAcceso titulo="Catálogos" to="/catalogos" />
+            <TarjetaAcceso titulo="Finanzas" to="/finanzas" />
+            <TarjetaAcceso titulo="Recomendaciones" to="/finanzas/recomendaciones" />
+            <TarjetaAcceso titulo="Usuarios" to="/usuarios" />
           </>
         )}
       </div>
@@ -34,13 +35,13 @@ export default function Dashboard() {
   )
 }
 
-function TarjetaAcceso({ titulo, href }) {
+function TarjetaAcceso({ titulo, to }) {
   return (
-    <a
-      href={href}
+    <Link
+      to={to}
       className="block bg-white rounded-xl shadow-sm border border-mama-gray/10 p-5 hover:shadow-md hover:border-mama-terracotta/40 transition-all"
     >
       <span className="font-medium text-mama-charcoal">{titulo}</span>
-    </a>
+    </Link>
   )
 }
