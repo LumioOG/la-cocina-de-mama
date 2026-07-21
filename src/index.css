@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  /* Paleta "La Cocina de Mamá" - cálida, apetitosa, profesional */
+  --color-mama-cream: #FFF8F0;
+  --color-mama-terracotta: #C0553B;
+  --color-mama-terracotta-dark: #9A4230;
+  --color-mama-gold: #E3A857;
+  --color-mama-green: #5B7553;
+  --color-mama-charcoal: #2B2420;
+  --color-mama-gray: #8A8178;
+
+  --font-display: "Fraunces", serif;
+  --font-body: "Inter", sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-mama-cream);
+  color: var(--color-mama-charcoal);
+}
