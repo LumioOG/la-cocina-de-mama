@@ -8,6 +8,8 @@ const FORM_VACIO = {
   id: null,
   nombre: '',
   unidad_medida: 'kg',
+  unidad_compra: 'unidad',
+  contenido_por_unidad_compra: '1',
   costo_unitario_actual: '',
   stock_actual: '',
   stock_minimo: '',
@@ -51,6 +53,8 @@ export default function Insumos() {
       id: insumo.id,
       nombre: insumo.nombre,
       unidad_medida: insumo.unidad_medida,
+      unidad_compra: insumo.unidad_compra || 'unidad',
+      contenido_por_unidad_compra: insumo.contenido_por_unidad_compra || '1',
       costo_unitario_actual: insumo.costo_unitario_actual,
       stock_actual: insumo.stock_actual,
       stock_minimo: insumo.stock_minimo,
@@ -66,6 +70,8 @@ export default function Insumos() {
     const payload = {
       nombre: form.nombre.trim(),
       unidad_medida: form.unidad_medida,
+      unidad_compra: form.unidad_compra.trim(),
+      contenido_por_unidad_compra: Number(form.contenido_por_unidad_compra) || 1,
       costo_unitario_actual: Number(form.costo_unitario_actual) || 0,
       stock_actual: Number(form.stock_actual) || 0,
       stock_minimo: Number(form.stock_minimo) || 0,
@@ -150,13 +156,15 @@ export default function Insumos() {
                 required
                 value={form.nombre}
                 onChange={(e) => setForm({ ...form, nombre: e.target.value })}
-                placeholder="Ej. Carne molida"
+                placeholder="Ej. Harina de trigo"
                 className="w-full rounded-lg border border-mama-gray/30 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-mama-terracotta"
               />
             </div>
 
             <div>
-              <label className="block text-sm text-mama-charcoal mb-1">Unidad de medida</label>
+              <label className="block text-sm text-mama-charcoal mb-1">
+                Unidad de consumo (la que usas en recetas)
+              </label>
               <select
                 value={form.unidad_medida}
                 onChange={(e) => setForm({ ...form, unidad_medida: e.target.value })}
@@ -169,10 +177,56 @@ export default function Insumos() {
                 ))}
               </select>
             </div>
+          </div>
 
+          <div className="bg-mama-cream rounded-lg p-4 space-y-3">
+            <p className="text-sm text-mama-charcoal font-medium">
+              ¿Cómo compras este insumo?
+            </p>
+            <p className="text-xs text-mama-gray -mt-2">
+              Ej: harina se compra por <strong>saco</strong>, y cada saco trae 20 kg. El sistema
+              calcula solo el costo por kg.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm text-mama-charcoal mb-1">
+                  Unidad de compra
+                </label>
+                <input
+                  required
+                  value={form.unidad_compra}
+                  onChange={(e) => setForm({ ...form, unidad_compra: e.target.value })}
+                  placeholder="Ej. saco, botella, caja"
+                  className="w-full rounded-lg border border-mama-gray/30 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-mama-terracotta"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm text-mama-charcoal mb-1">
+                  Contenido por {form.unidad_compra || 'unidad de compra'} (en{' '}
+                  {form.unidad_medida})
+                </label>
+                <input
+                  type="number"
+                  min="0.0001"
+                  step="0.0001"
+                  required
+                  value={form.contenido_por_unidad_compra}
+                  onChange={(e) =>
+                    setForm({ ...form, contenido_por_unidad_compra: e.target.value })
+                  }
+                  placeholder="Ej. 20"
+                  className="w-full rounded-lg border border-mama-gray/30 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-mama-terracotta"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm text-mama-charcoal mb-1">
-                Costo unitario actual (COP)
+                Costo actual por {form.unidad_medida || 'unidad de consumo'} (COP)
               </label>
               <input
                 type="number"
@@ -183,6 +237,10 @@ export default function Insumos() {
                 onChange={(e) => setForm({ ...form, costo_unitario_actual: e.target.value })}
                 className="w-full rounded-lg border border-mama-gray/30 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-mama-terracotta"
               />
+              <p className="text-xs text-mama-gray mt-1">
+                Solo para el registro inicial — desde la primera compra, esto se recalcula
+                automáticamente.
+              </p>
             </div>
 
             <div>
@@ -248,8 +306,8 @@ export default function Insumos() {
             <thead>
               <tr className="text-left text-mama-gray border-b border-mama-gray/10">
                 <th className="px-4 py-3 font-medium">Nombre</th>
-                <th className="px-4 py-3 font-medium">Unidad</th>
-                <th className="px-4 py-3 font-medium">Costo unitario</th>
+                <th className="px-4 py-3 font-medium">Se compra por</th>
+                <th className="px-4 py-3 font-medium">Costo / unidad</th>
                 <th className="px-4 py-3 font-medium">Stock actual</th>
                 <th className="px-4 py-3 font-medium">Stock mínimo</th>
                 <th className="px-4 py-3 font-medium"></th>
@@ -263,9 +321,17 @@ export default function Insumos() {
                     <td className="px-4 py-3 text-mama-charcoal font-medium">
                       {insumo.nombre}
                     </td>
-                    <td className="px-4 py-3 text-mama-gray">{insumo.unidad_medida}</td>
                     <td className="px-4 py-3 text-mama-gray">
-                      ${Number(insumo.costo_unitario_actual).toLocaleString('es-CO')}
+                      {insumo.unidad_compra}
+                      {insumo.contenido_por_unidad_compra != 1 && (
+                        <span className="text-xs text-mama-gray/70">
+                          {' '}
+                          ({insumo.contenido_por_unidad_compra} {insumo.unidad_medida})
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-4 py-3 text-mama-gray">
+                      ${Number(insumo.costo_unitario_actual).toLocaleString('es-CO')} / {insumo.unidad_medida}
                     </td>
                     <td className="px-4 py-3">
                       <span className={stockBajo ? 'text-red-600 font-medium' : 'text-mama-charcoal'}>
