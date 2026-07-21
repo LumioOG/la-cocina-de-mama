@@ -1,9 +1,10 @@
 import { Link, Routes, Route, useLocation } from 'react-router-dom'
 import Insumos from './Insumos'
+import Productos from './Productos'
 
 const secciones = [
   { nombre: 'Insumos', to: '/catalogos/insumos', listo: true },
-  { nombre: 'Productos', to: '/catalogos/productos', listo: false },
+  { nombre: 'Productos', to: '/catalogos/productos', listo: true },
   { nombre: 'Recetas', to: '/catalogos/recetas', listo: false },
 ]
 
@@ -42,6 +43,7 @@ export default function Catalogos() {
 
       <Routes>
         <Route path="insumos" element={<Insumos />} />
+        <Route path="productos" element={<Productos />} />
       </Routes>
     </div>
   )
