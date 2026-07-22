@@ -12,6 +12,7 @@ import Gastos from './pages/operativos/Gastos'
 import Catalogos from './pages/catalogos/Catalogos'
 import Finanzas from './pages/finanzas/Finanzas'
 import Recomendaciones from './pages/finanzas/Recomendaciones'
+import Exportacion from './pages/exportacion/Exportacion'
 
 export default function App() {
   return (
@@ -54,6 +55,14 @@ export default function App() {
               element={
                 <RutaProtegida soloAdmin>
                   <Recomendaciones />
+                </RutaProtegida>
+              }
+            />
+            <Route
+              path="/exportacion"
+              element={
+                <RutaProtegida soloAdmin>
+                  <Exportacion />
                 </RutaProtegida>
               }
             />
