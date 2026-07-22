@@ -244,8 +244,8 @@ export default function Exportacion() {
                 onClick={() => toggleTipo(t.id)}
                 className={`text-sm px-3 py-1.5 rounded-lg border transition-colors ${
                   tiposSeleccionados.includes(t.id)
-                    ? 'bg-mama-terracotta text-white border-mama-terracotta'
-                    : 'bg-white text-mama-charcoal border-mama-gray/20 hover:border-mama-terracotta/40'
+                    ? 'bg-mama-maroon-600 text-white border-mama-maroon-600'
+                    : 'bg-white text-mama-charcoal border-mama-gray/20 hover:border-mama-maroon-600/40'
                 }`}
               >
                 {t.nombre}
@@ -258,7 +258,7 @@ export default function Exportacion() {
           <button
             onClick={exportarExcel}
             disabled={exportando}
-            className="flex-1 bg-mama-green hover:opacity-90 transition-opacity text-white font-medium px-4 py-2 rounded-lg disabled:opacity-60"
+            className="flex-1 bg-mama-maroon-600 hover:bg-mama-maroon-700 transition-colors text-white font-medium px-4 py-2 rounded-lg disabled:opacity-60"
           >
             {exportando ? 'Generando...' : 'Descargar Excel'}
           </button>

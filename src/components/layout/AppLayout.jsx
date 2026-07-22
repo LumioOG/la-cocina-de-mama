@@ -1,5 +1,37 @@
-import { Outlet, Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Outlet, Link, useLocation } from 'react-router-dom'
+import {
+  LayoutDashboard,
+  ShoppingCart,
+  ChefHat,
+  TrendingUp,
+  Receipt,
+  BookOpen,
+  PiggyBank,
+  Lightbulb,
+  Download,
+  Users,
+  LogOut,
+  Menu,
+  X,
+} from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
+
+const NAV_EMPLEADO = [
+  { titulo: 'Dashboard', to: '/', icono: LayoutDashboard, exact: true },
+  { titulo: 'Compras', to: '/compras', icono: ShoppingCart },
+  { titulo: 'Producción', to: '/produccion', icono: ChefHat },
+  { titulo: 'Ventas', to: '/ventas', icono: TrendingUp },
+  { titulo: 'Gastos', to: '/gastos', icono: Receipt },
+]
+
+const NAV_ADMIN = [
+  { titulo: 'Catálogos', to: '/catalogos', icono: BookOpen },
+  { titulo: 'Finanzas', to: '/finanzas', icono: PiggyBank },
+  { titulo: 'Recomendaciones', to: '/finanzas/recomendaciones', icono: Lightbulb },
+  { titulo: 'Exportar datos', to: '/exportacion', icono: Download },
+  { titulo: 'Usuarios', to: '/usuarios', icono: Users },
+]
 
 function iniciales(nombre) {
   if (!nombre) return '?'
@@ -12,53 +44,98 @@ function iniciales(nombre) {
 
 export default function AppLayout() {
   const { perfil, esAdmin, logout } = useAuth()
+  const location = useLocation()
+  const [menuAbierto, setMenuAbierto] = useState(false)
+
+  const items = esAdmin ? [...NAV_EMPLEADO, ...NAV_ADMIN] : NAV_EMPLEADO
+
+  function estaActivo(item) {
+    return item.exact ? location.pathname === item.to : location.pathname.startsWith(item.to)
+  }
+
+  const contenidoSidebar = (
+    <div className="h-full flex flex-col bg-mama-terracotta text-mama-cream rounded-3xl p-5">
+      <div className="flex flex-col items-center text-center pb-6 mb-2 border-b border-mama-cream/10">
+        <span className="w-16 h-16 rounded-full bg-mama-cream/15 flex items-center justify-center font-display text-xl mb-3">
+          {iniciales(perfil?.nombre)}
+        </span>
+        <p className="font-medium">{perfil?.nombre}</p>
+        <p className="text-xs text-mama-cream/60">{esAdmin ? 'Administrador' : 'Empleado'}</p>
+      </div>
+
+      <nav className="flex-1 space-y-1 overflow-y-auto">
+        {items.map((item) => {
+          const Icono = item.icono
+          const activo = estaActivo(item)
+          return (
+            <Link
+              key={item.to}
+              to={item.to}
+              onClick={() => setMenuAbierto(false)}
+              className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+                activo
+                  ? 'bg-mama-maroon-600 text-white'
+                  : 'text-mama-cream/80 hover:bg-mama-cream/10'
+              }`}
+            >
+              <Icono size={18} strokeWidth={2} />
+              {item.titulo}
+            </Link>
+          )
+        })}
+      </nav>
+
+      <button
+        onClick={logout}
+        className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-mama-cream/70 hover:bg-mama-cream/10 mt-2"
+      >
+        <LogOut size={18} strokeWidth={2} />
+        Salir
+      </button>
+    </div>
+  )
 
   return (
-    <div className="min-h-screen bg-mama-cream">
-      <header className="relative bg-mama-terracotta">
-        <div className="px-4 sm:px-6 py-4 flex items-center justify-between">
-          <Link to="/" className="font-display text-lg text-mama-cream tracking-wide">
-            La Cocina de Mamá
-          </Link>
+    <div className="min-h-screen bg-mama-cream md:flex md:p-4 md:gap-4">
+      {/* Sidebar — fijo en escritorio */}
+      <aside className="hidden md:block md:w-64 md:shrink-0">
+        <div className="sticky top-4 h-[calc(100vh-2rem)]">{contenidoSidebar}</div>
+      </aside>
 
-          <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-2">
-              <span className="w-8 h-8 rounded-full bg-mama-cream/15 text-mama-cream text-xs font-medium flex items-center justify-center">
-                {iniciales(perfil?.nombre)}
-              </span>
-              <div className="text-sm leading-tight">
-                <p className="text-mama-cream font-medium">{perfil?.nombre}</p>
-                <p className="text-mama-cream/60 text-xs">
-                  {esAdmin ? 'Administrador' : 'Empleado'}
-                </p>
-              </div>
-            </div>
-
-            <button
-              onClick={logout}
-              className="text-sm bg-mama-cream/10 hover:bg-mama-cream/20 text-mama-cream px-3 py-1.5 rounded-full font-medium"
-            >
-              Salir
-            </button>
-          </div>
-        </div>
-
-        {/* Firma visual: borde ondulado tipo toldo de puesto de comida */}
-        <svg
-          className="w-full block"
-          style={{ height: '14px' }}
-          viewBox="0 0 240 14"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0,0 C10,14 20,14 30,0 C40,14 50,14 60,0 C70,14 80,14 90,0 C100,14 110,14 120,0 C130,14 140,14 150,0 C160,14 170,14 180,0 C190,14 200,14 210,0 C220,14 230,14 240,0 L240,0 L0,0 Z"
-            fill="var(--color-mama-terracotta)"
-          />
-        </svg>
+      {/* Barra superior — solo en móvil */}
+      <header className="md:hidden bg-mama-terracotta text-mama-cream px-4 py-3 flex items-center justify-between">
+        <Link to="/" className="font-display text-lg">
+          La Cocina de Mamá
+        </Link>
+        <button onClick={() => setMenuAbierto(true)} aria-label="Abrir menú">
+          <Menu size={22} />
+        </button>
       </header>
 
-      <main>
+      {/* Menú deslizable — solo en móvil */}
+      {menuAbierto && (
+        <div className="md:hidden fixed inset-0 z-50 flex">
+          <div className="w-72 p-3">
+            <div className="relative h-full">
+              <button
+                onClick={() => setMenuAbierto(false)}
+                className="absolute -right-1 -top-1 z-10 bg-mama-cream text-mama-terracotta rounded-full p-1.5 shadow-md"
+                aria-label="Cerrar menú"
+              >
+                <X size={18} />
+              </button>
+              {contenidoSidebar}
+            </div>
+          </div>
+          <div
+            className="flex-1 bg-black/30"
+            onClick={() => setMenuAbierto(false)}
+            aria-hidden="true"
+          />
+        </div>
+      )}
+
+      <main className="flex-1 min-w-0">
         <Outlet />
       </main>
     </div>

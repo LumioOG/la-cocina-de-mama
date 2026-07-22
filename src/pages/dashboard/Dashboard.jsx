@@ -1,22 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import { supabase } from '../../lib/supabaseClient'
-
-const ACCESOS_EMPLEADO = [
-  { titulo: 'Compras', to: '/compras' },
-  { titulo: 'Producción', to: '/produccion' },
-  { titulo: 'Ventas', to: '/ventas' },
-  { titulo: 'Gastos', to: '/gastos' },
-]
-
-const ACCESOS_ADMIN = [
-  { titulo: 'Catálogos', to: '/catalogos' },
-  { titulo: 'Finanzas', to: '/finanzas' },
-  { titulo: 'Recomendaciones', to: '/finanzas/recomendaciones' },
-  { titulo: 'Exportar datos', to: '/exportacion' },
-  { titulo: 'Usuarios', to: '/usuarios' },
-]
 
 function hoyISO() {
   return new Date().toISOString().slice(0, 10)
@@ -117,13 +101,7 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* Accesos rápidos */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        {ACCESOS_EMPLEADO.map((a) => (
-          <TarjetaAcceso key={a.titulo} {...a} />
-        ))}
-        {esAdmin && ACCESOS_ADMIN.map((a) => <TarjetaAcceso key={a.titulo} {...a} />)}
-      </div>
+      {/* Accesos rápidos: ya viven en el menú lateral */}
 
       {cargando ? (
         <p className="text-mama-gray">Cargando resumen del negocio...</p>
@@ -210,16 +188,5 @@ export default function Dashboard() {
         </div>
       )}
     </div>
-  )
-}
-
-function TarjetaAcceso({ titulo, to }) {
-  return (
-    <Link
-      to={to}
-      className="block bg-white rounded-2xl shadow-sm border border-mama-gray/10 p-5 hover:shadow-md hover:border-mama-terracotta/30 hover:-translate-y-0.5 transition-all"
-    >
-      <span className="font-medium text-mama-charcoal">{titulo}</span>
-    </Link>
   )
 }
