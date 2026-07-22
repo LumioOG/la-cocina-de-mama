@@ -13,6 +13,7 @@ import Catalogos from './pages/catalogos/Catalogos'
 import Finanzas from './pages/finanzas/Finanzas'
 import Recomendaciones from './pages/finanzas/Recomendaciones'
 import Exportacion from './pages/exportacion/Exportacion'
+import Usuarios from './pages/usuarios/Usuarios'
 
 export default function App() {
   return (
@@ -63,6 +64,14 @@ export default function App() {
               element={
                 <RutaProtegida soloAdmin>
                   <Exportacion />
+                </RutaProtegida>
+              }
+            />
+            <Route
+              path="/usuarios"
+              element={
+                <RutaProtegida soloAdmin>
+                  <Usuarios />
                 </RutaProtegida>
               }
             />
