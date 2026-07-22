@@ -144,7 +144,7 @@ export default function Usuarios() {
       </p>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg p-3 mb-4">
+        <div className="bg-mama-maroon-50 border border-mama-maroon-200 text-mama-maroon-700 text-sm rounded-lg p-3 mb-4">
           {error}
         </div>
       )}
@@ -157,7 +157,7 @@ export default function Usuarios() {
       {mostrarForm && (
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-xl shadow-sm border border-mama-gray/10 p-5 mb-6 space-y-4"
+          className="bg-white rounded-2xl shadow-sm border border-mama-gray/10 p-5 mb-6 space-y-4"
         >
           <h2 className="font-medium text-mama-charcoal">Nuevo usuario</h2>
 
@@ -234,7 +234,7 @@ export default function Usuarios() {
         </form>
       )}
 
-      <div className="bg-white rounded-xl shadow-sm border border-mama-gray/10 overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-sm border border-mama-gray/10 overflow-hidden">
         {cargando ? (
           <p className="p-5 text-mama-gray">Cargando usuarios...</p>
         ) : (
@@ -283,7 +283,7 @@ export default function Usuarios() {
                     {u.id !== session.user.id && (
                       <button
                         onClick={() => eliminarUsuario(u)}
-                        className="text-red-500 hover:underline text-xs"
+                        className="text-mama-maroon-500 hover:underline text-xs"
                       >
                         Eliminar
                       </button>

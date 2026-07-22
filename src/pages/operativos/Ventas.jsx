@@ -117,7 +117,7 @@ export default function Ventas() {
       </p>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg p-3 mb-4">
+        <div className="bg-mama-maroon-50 border border-mama-maroon-200 text-mama-maroon-700 text-sm rounded-lg p-3 mb-4">
           {error}
         </div>
       )}
@@ -134,7 +134,7 @@ export default function Ventas() {
       ) : (
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-xl shadow-sm border border-mama-gray/10 p-5 mb-8 space-y-4"
+          className="bg-white rounded-2xl shadow-sm border border-mama-gray/10 p-5 mb-8 space-y-4"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
@@ -185,7 +185,7 @@ export default function Ventas() {
                 className="w-full rounded-lg border border-mama-gray/30 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-mama-terracotta"
               />
               {excedeStock && (
-                <p className="text-xs text-red-600 mt-1">
+                <p className="text-xs text-mama-maroon-600 mt-1">
                   Ojo: esto supera el stock disponible ({productoSeleccionado.stock_actual}).
                 </p>
               )}
@@ -242,7 +242,7 @@ export default function Ventas() {
       )}
 
       <h2 className="font-medium text-mama-charcoal mb-3">Historial reciente</h2>
-      <div className="bg-white rounded-xl shadow-sm border border-mama-gray/10 overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-sm border border-mama-gray/10 overflow-hidden">
         {cargando ? (
           <p className="p-5 text-mama-gray">Cargando ventas...</p>
         ) : ventas.length === 0 ? (

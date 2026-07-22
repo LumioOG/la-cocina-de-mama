@@ -132,7 +132,7 @@ export default function Finanzas() {
       </p>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg p-3 mb-4">
+        <div className="bg-mama-maroon-50 border border-mama-maroon-200 text-mama-maroon-700 text-sm rounded-lg p-3 mb-4">
           {error}
         </div>
       )}
@@ -164,12 +164,12 @@ export default function Finanzas() {
             />
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-mama-gray/10 p-5 mb-6">
+          <div className="bg-white rounded-2xl shadow-sm border border-mama-gray/10 p-5 mb-6">
             <div className="flex items-center justify-between mb-1">
               <h2 className="font-medium text-mama-charcoal">Utilidad estimada del período</h2>
               <span
                 className={`text-xl font-display ${
-                  totales.utilidadEstimada >= 0 ? 'text-mama-green' : 'text-red-600'
+                  totales.utilidadEstimada >= 0 ? 'text-mama-green' : 'text-mama-maroon-600'
                 }`}
               >
                 {formatoCOP(totales.utilidadEstimada)}
@@ -181,7 +181,7 @@ export default function Finanzas() {
             </p>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-mama-gray/10 p-5">
+          <div className="bg-white rounded-2xl shadow-sm border border-mama-gray/10 p-5">
             <h2 className="font-medium text-mama-charcoal mb-4">Tendencia de ventas</h2>
             {ventas.length === 0 ? (
               <p className="text-sm text-mama-gray">No hay ventas en este período.</p>
@@ -216,7 +216,7 @@ export default function Finanzas() {
 
 function TarjetaMetrica({ titulo, valor, nota }) {
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-mama-gray/10 p-4">
+    <div className="bg-white rounded-2xl shadow-sm border border-mama-gray/10 p-4">
       <p className="text-sm text-mama-gray mb-1">{titulo}</p>
       <p className="text-xl font-display text-mama-charcoal">{valor}</p>
       {nota && <p className="text-xs text-mama-gray mt-1">{nota}</p>}

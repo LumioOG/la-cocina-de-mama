@@ -130,7 +130,7 @@ export default function Productos() {
       </p>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg p-3 mb-4">
+        <div className="bg-mama-maroon-50 border border-mama-maroon-200 text-mama-maroon-700 text-sm rounded-lg p-3 mb-4">
           {error}
         </div>
       )}
@@ -138,7 +138,7 @@ export default function Productos() {
       {mostrarForm && (
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-xl shadow-sm border border-mama-gray/10 p-5 mb-6 space-y-4"
+          className="bg-white rounded-2xl shadow-sm border border-mama-gray/10 p-5 mb-6 space-y-4"
         >
           <h2 className="font-medium text-mama-charcoal">
             {form.id ? 'Editar producto' : 'Nuevo producto'}
@@ -250,7 +250,7 @@ export default function Productos() {
         </form>
       )}
 
-      <div className="bg-white rounded-xl shadow-sm border border-mama-gray/10 overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-sm border border-mama-gray/10 overflow-hidden">
         {cargando ? (
           <p className="p-5 text-mama-gray">Cargando productos...</p>
         ) : productos.length === 0 ? (
@@ -283,11 +283,11 @@ export default function Productos() {
                       ${Number(producto.precio_venta_actual).toLocaleString('es-CO')}
                     </td>
                     <td className="px-4 py-3">
-                      <span className={stockBajo ? 'text-red-600 font-medium' : 'text-mama-charcoal'}>
+                      <span className={stockBajo ? 'text-mama-maroon-600 font-medium' : 'text-mama-charcoal'}>
                         {producto.stock_actual}
                       </span>
                       {stockBajo && (
-                        <span className="ml-2 inline-block bg-red-50 text-red-600 text-xs px-2 py-0.5 rounded-full">
+                        <span className="ml-2 inline-block bg-mama-maroon-50 text-mama-maroon-600 text-xs px-2.5 py-1 rounded-full font-medium">
                           Stock bajo
                         </span>
                       )}
@@ -295,11 +295,11 @@ export default function Productos() {
                     <td className="px-4 py-3 text-mama-gray">{producto.stock_minimo}</td>
                     <td className="px-4 py-3">
                       {producto.activo ? (
-                        <span className="text-mama-green text-xs bg-mama-green/10 px-2 py-0.5 rounded-full">
+                        <span className="text-mama-green text-xs bg-mama-green/10 px-2.5 py-1 rounded-full font-medium">
                           Activo
                         </span>
                       ) : (
-                        <span className="text-mama-gray text-xs bg-mama-gray/10 px-2 py-0.5 rounded-full">
+                        <span className="text-mama-gray text-xs bg-mama-gray/10 px-2.5 py-1 rounded-full font-medium">
                           Inactivo
                         </span>
                       )}
@@ -313,7 +313,7 @@ export default function Productos() {
                       </button>
                       <button
                         onClick={() => handleEliminar(producto)}
-                        className="text-red-500 hover:underline"
+                        className="text-mama-maroon-500 hover:underline"
                       >
                         Eliminar
                       </button>

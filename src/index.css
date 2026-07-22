@@ -1,14 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  /* Paleta "La Cocina de Mamá" - cálida, apetitosa, profesional */
-  --color-mama-cream: #FFF8F0;
-  --color-mama-terracotta: #C0553B;
-  --color-mama-terracotta-dark: #9A4230;
-  --color-mama-gold: #E3A857;
-  --color-mama-green: #5B7553;
-  --color-mama-charcoal: #2B2420;
-  --color-mama-gray: #8A8178;
+  /* Paleta "La Cocina de Mamá" — tomada de la referencia de marca de Karo */
+  --color-mama-cream: #EFE8DF;         /* Alabaster — fondo general */
+  --color-mama-terracotta: #0F414A;    /* Midnight blue — color principal (botones, links, foco) */
+  --color-mama-terracotta-dark: #0A2E35; /* Midnight blue, más oscuro — hover */
+  --color-mama-gold: #D8BA98;          /* Tan — alertas suaves, resaltados cálidos */
+  --color-mama-green: #96C0CE;         /* Light blue — estados positivos / "activo" */
+  --color-mama-charcoal: #0F414A;      /* Midnight blue — texto principal */
+  --color-mama-gray: #7A8A90;          /* Gris con tinte azulado, neutral */
+
+  /* Escala de "Maroon" para alertas y estados negativos, reemplaza el rojo genérico */
+  --color-mama-maroon-50: #FBEAE7;
+  --color-mama-maroon-200: #E3B3AC;
+  --color-mama-maroon-500: #A83D2E;
+  --color-mama-maroon-600: #7F0303;
+  --color-mama-maroon-700: #5C0202;
 
   --font-display: "Fraunces", serif;
   --font-body: "Inter", sans-serif;
@@ -18,4 +25,9 @@ body {
   font-family: var(--font-body);
   background-color: var(--color-mama-cream);
   color: var(--color-mama-charcoal);
+}
+
+/* Ligero suavizado global de bordes y transición, para que todo se sienta cohesivo */
+button, a, input, select, textarea {
+  transition: all 150ms ease;
 }

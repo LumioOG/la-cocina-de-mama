@@ -112,7 +112,7 @@ export default function Dashboard() {
       </p>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg p-3 mb-4">
+        <div className="bg-mama-maroon-50 border border-mama-maroon-200 text-mama-maroon-700 text-sm rounded-lg p-3 mb-4">
           {error}
         </div>
       )}
@@ -130,33 +130,33 @@ export default function Dashboard() {
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Resumen del día */}
-          <div className="bg-white rounded-xl shadow-sm border border-mama-gray/10 p-5">
-            <h2 className="font-medium text-mama-charcoal mb-4">Resumen de hoy</h2>
+          <div className="bg-mama-terracotta rounded-2xl shadow-sm p-5 text-mama-cream">
+            <h2 className="font-medium mb-4 text-mama-cream/80">Resumen de hoy</h2>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-2xl font-display text-mama-terracotta-dark">
+                <p className="text-2xl font-display">
                   ${totalVentasHoy.toLocaleString('es-CO')}
                 </p>
-                <p className="text-sm text-mama-gray">Ingresado en ventas</p>
+                <p className="text-sm text-mama-cream/60">Ingresado en ventas</p>
               </div>
               <div>
-                <p className="text-2xl font-display text-mama-terracotta-dark">
-                  {unidadesVendidasHoy}
-                </p>
-                <p className="text-sm text-mama-gray">Unidades vendidas</p>
+                <p className="text-2xl font-display">{unidadesVendidasHoy}</p>
+                <p className="text-sm text-mama-cream/60">Unidades vendidas</p>
               </div>
             </div>
             {ventasHoy.length === 0 && (
-              <p className="text-sm text-mama-gray mt-4">Aún no hay ventas registradas hoy.</p>
+              <p className="text-sm text-mama-cream/60 mt-4">
+                Aún no hay ventas registradas hoy.
+              </p>
             )}
           </div>
 
           {/* Alertas de inventario */}
-          <div className="bg-white rounded-xl shadow-sm border border-mama-gray/10 p-5">
+          <div className="bg-white rounded-2xl shadow-sm border border-mama-gray/10 p-5">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-medium text-mama-charcoal">Alertas de inventario</h2>
               {alertasStock > 0 && (
-                <span className="bg-red-50 text-red-600 text-xs px-2 py-0.5 rounded-full">
+                <span className="bg-mama-maroon-50 text-mama-maroon-600 text-xs px-2.5 py-1 rounded-full font-medium">
                   {alertasStock} {alertasStock === 1 ? 'alerta' : 'alertas'}
                 </span>
               )}
@@ -171,7 +171,7 @@ export default function Dashboard() {
                 {insumosStockBajo.map((i) => (
                   <li key={`insumo-${i.id}`} className="flex justify-between">
                     <span className="text-mama-charcoal">{i.nombre} (insumo)</span>
-                    <span className="text-red-600 font-medium">
+                    <span className="text-mama-maroon-600 font-medium">
                       {i.stock_actual} {i.unidad_medida}
                     </span>
                   </li>
@@ -179,7 +179,7 @@ export default function Dashboard() {
                 {productosStockBajo.map((p) => (
                   <li key={`producto-${p.id}`} className="flex justify-between">
                     <span className="text-mama-charcoal">{p.nombre} (producto)</span>
-                    <span className="text-red-600 font-medium">
+                    <span className="text-mama-maroon-600 font-medium">
                       {p.stock_actual} {p.unidad_venta}
                     </span>
                   </li>
@@ -189,7 +189,7 @@ export default function Dashboard() {
           </div>
 
           {/* Más vendidos de la semana */}
-          <div className="bg-white rounded-xl shadow-sm border border-mama-gray/10 p-5 lg:col-span-2">
+          <div className="bg-white rounded-2xl shadow-sm border border-mama-gray/10 p-5 lg:col-span-2">
             <h2 className="font-medium text-mama-charcoal mb-4">Más vendidos esta semana</h2>
             {masVendidosSemana.length === 0 ? (
               <p className="text-sm text-mama-gray">Aún no hay ventas en los últimos 7 días.</p>
@@ -197,7 +197,9 @@ export default function Dashboard() {
               <ul className="space-y-2">
                 {masVendidosSemana.map((item, i) => (
                   <li key={item.nombre} className="flex items-center gap-3">
-                    <span className="text-mama-gray text-sm w-4">{i + 1}</span>
+                    <span className="w-6 h-6 rounded-full bg-mama-cream text-mama-terracotta text-xs font-medium flex items-center justify-center">
+                      {i + 1}
+                    </span>
                     <span className="text-mama-charcoal flex-1">{item.nombre}</span>
                     <span className="text-mama-gray text-sm">{item.cantidad} unidades</span>
                   </li>
@@ -215,7 +217,7 @@ function TarjetaAcceso({ titulo, to }) {
   return (
     <Link
       to={to}
-      className="block bg-white rounded-xl shadow-sm border border-mama-gray/10 p-5 hover:shadow-md hover:border-mama-terracotta/40 transition-all"
+      className="block bg-white rounded-2xl shadow-sm border border-mama-gray/10 p-5 hover:shadow-md hover:border-mama-terracotta/30 hover:-translate-y-0.5 transition-all"
     >
       <span className="font-medium text-mama-charcoal">{titulo}</span>
     </Link>

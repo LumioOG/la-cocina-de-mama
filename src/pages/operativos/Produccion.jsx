@@ -103,7 +103,7 @@ export default function Produccion() {
       </p>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg p-3 mb-4">
+        <div className="bg-mama-maroon-50 border border-mama-maroon-200 text-mama-maroon-700 text-sm rounded-lg p-3 mb-4">
           {error}
         </div>
       )}
@@ -127,7 +127,7 @@ export default function Produccion() {
       ) : (
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-xl shadow-sm border border-mama-gray/10 p-5 mb-8 space-y-4"
+          className="bg-white rounded-2xl shadow-sm border border-mama-gray/10 p-5 mb-8 space-y-4"
         >
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
@@ -193,7 +193,7 @@ export default function Produccion() {
       )}
 
       <h2 className="font-medium text-mama-charcoal mb-3">Historial reciente</h2>
-      <div className="bg-white rounded-xl shadow-sm border border-mama-gray/10 overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-sm border border-mama-gray/10 overflow-hidden">
         {cargando ? (
           <p className="p-5 text-mama-gray">Cargando producciones...</p>
         ) : producciones.length === 0 ? (

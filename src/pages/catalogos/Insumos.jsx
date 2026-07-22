@@ -135,7 +135,7 @@ export default function Insumos() {
       </p>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg p-3 mb-4">
+        <div className="bg-mama-maroon-50 border border-mama-maroon-200 text-mama-maroon-700 text-sm rounded-lg p-3 mb-4">
           {error}
         </div>
       )}
@@ -143,7 +143,7 @@ export default function Insumos() {
       {mostrarForm && (
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-xl shadow-sm border border-mama-gray/10 p-5 mb-6 space-y-4"
+          className="bg-white rounded-2xl shadow-sm border border-mama-gray/10 p-5 mb-6 space-y-4"
         >
           <h2 className="font-medium text-mama-charcoal">
             {form.id ? 'Editar insumo' : 'Nuevo insumo'}
@@ -294,7 +294,7 @@ export default function Insumos() {
         </form>
       )}
 
-      <div className="bg-white rounded-xl shadow-sm border border-mama-gray/10 overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-sm border border-mama-gray/10 overflow-hidden">
         {cargando ? (
           <p className="p-5 text-mama-gray">Cargando insumos...</p>
         ) : insumos.length === 0 ? (
@@ -334,11 +334,11 @@ export default function Insumos() {
                       ${Number(insumo.costo_unitario_actual).toLocaleString('es-CO')} / {insumo.unidad_medida}
                     </td>
                     <td className="px-4 py-3">
-                      <span className={stockBajo ? 'text-red-600 font-medium' : 'text-mama-charcoal'}>
+                      <span className={stockBajo ? 'text-mama-maroon-600 font-medium' : 'text-mama-charcoal'}>
                         {insumo.stock_actual}
                       </span>
                       {stockBajo && (
-                        <span className="ml-2 inline-block bg-red-50 text-red-600 text-xs px-2 py-0.5 rounded-full">
+                        <span className="ml-2 inline-block bg-mama-maroon-50 text-mama-maroon-600 text-xs px-2.5 py-1 rounded-full font-medium">
                           Stock bajo
                         </span>
                       )}
@@ -353,7 +353,7 @@ export default function Insumos() {
                       </button>
                       <button
                         onClick={() => handleEliminar(insumo)}
-                        className="text-red-500 hover:underline"
+                        className="text-mama-maroon-500 hover:underline"
                       >
                         Eliminar
                       </button>

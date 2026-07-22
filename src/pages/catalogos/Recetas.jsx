@@ -229,7 +229,7 @@ export default function Recetas() {
       )}
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg p-3 mb-4">
+        <div className="bg-mama-maroon-50 border border-mama-maroon-200 text-mama-maroon-700 text-sm rounded-lg p-3 mb-4">
           {error}
         </div>
       )}
@@ -237,7 +237,7 @@ export default function Recetas() {
       {mostrarForm && (
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-xl shadow-sm border border-mama-gray/10 p-5 mb-6 space-y-5"
+          className="bg-white rounded-2xl shadow-sm border border-mama-gray/10 p-5 mb-6 space-y-5"
         >
           <h2 className="font-medium text-mama-charcoal">
             {form.id ? 'Editar receta' : 'Nueva receta'}
@@ -354,7 +354,7 @@ export default function Recetas() {
                   <button
                     type="button"
                     onClick={() => eliminarFila(fila.key)}
-                    className="text-red-500 text-sm hover:underline shrink-0"
+                    className="text-mama-maroon-500 text-sm hover:underline shrink-0"
                   >
                     Quitar
                   </button>
@@ -410,7 +410,7 @@ export default function Recetas() {
           recetas.map((receta) => (
             <div
               key={receta.id}
-              className="bg-white rounded-xl shadow-sm border border-mama-gray/10 p-5"
+              className="bg-white rounded-2xl shadow-sm border border-mama-gray/10 p-5"
             >
               <div className="flex items-start justify-between">
                 <div>
@@ -419,7 +419,7 @@ export default function Recetas() {
                     Producto: {receta.productos?.nombre || '—'} · Rinde{' '}
                     {receta.rinde_bandejas} bandejas ({receta.rinde_unidades_por_bandeja} c/u)
                     {!receta.activa && (
-                      <span className="ml-2 text-mama-gray bg-mama-gray/10 text-xs px-2 py-0.5 rounded-full">
+                      <span className="ml-2 text-mama-gray bg-mama-gray/10 text-xs px-2.5 py-1 rounded-full font-medium">
                         Inactiva
                       </span>
                     )}
@@ -434,7 +434,7 @@ export default function Recetas() {
                   </button>
                   <button
                     onClick={() => handleEliminar(receta)}
-                    className="text-red-500 hover:underline text-sm"
+                    className="text-mama-maroon-500 hover:underline text-sm"
                   >
                     Eliminar
                   </button>

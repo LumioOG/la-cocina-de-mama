@@ -105,7 +105,7 @@ export default function Recomendaciones() {
       </p>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg p-3 mb-4">
+        <div className="bg-mama-maroon-50 border border-mama-maroon-200 text-mama-maroon-700 text-sm rounded-lg p-3 mb-4">
           {error}
         </div>
       )}
@@ -169,12 +169,12 @@ export default function Recomendaciones() {
 
 function TarjetaRecomendacion({ r }) {
   const margenPct = (r.margenActual * 100).toFixed(1)
-  const colorMargen = r.enRiesgo ? 'text-red-600' : 'text-mama-green'
+  const colorMargen = r.enRiesgo ? 'text-mama-maroon-600' : 'text-mama-green'
 
   return (
     <div
       className={`bg-white rounded-xl shadow-sm border p-5 ${
-        r.enRiesgo ? 'border-red-200' : 'border-mama-gray/10'
+        r.enRiesgo ? 'border-mama-maroon-200' : 'border-mama-gray/10'
       }`}
     >
       <div className="flex items-start justify-between flex-wrap gap-2">
@@ -188,7 +188,7 @@ function TarjetaRecomendacion({ r }) {
       </div>
 
       {r.enRiesgo && (
-        <div className="mt-3 bg-red-50 rounded-lg p-3 text-sm text-mama-charcoal">
+        <div className="mt-3 bg-mama-maroon-50 rounded-lg p-3 text-sm text-mama-charcoal">
           Recomendamos subir el precio de <strong>{r.producto}</strong> a{' '}
           <strong>{formatoCOP(r.precioSugerido)}</strong>
           {r.huboVariosLotes && r.variacionCosto > 0 && (

@@ -207,12 +207,12 @@ export default function Exportacion() {
       </p>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg p-3 mb-4">
+        <div className="bg-mama-maroon-50 border border-mama-maroon-200 text-mama-maroon-700 text-sm rounded-lg p-3 mb-4">
           {error}
         </div>
       )}
 
-      <div className="bg-white rounded-xl shadow-sm border border-mama-gray/10 p-5 space-y-5">
+      <div className="bg-white rounded-2xl shadow-sm border border-mama-gray/10 p-5 space-y-5">
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm text-mama-charcoal mb-1">Desde</label>

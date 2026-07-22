@@ -26,7 +26,7 @@ export default function Catalogos() {
               <Link
                 key={s.nombre}
                 to={s.listo ? s.to : '#'}
-                className={`block bg-white rounded-xl shadow-sm border border-mama-gray/10 p-5 transition-all ${
+                className={`block bg-white rounded-2xl shadow-sm border border-mama-gray/10 p-5 transition-all ${
                   s.listo
                     ? 'hover:shadow-md hover:border-mama-terracotta/40'
                     : 'opacity-50 cursor-not-allowed'
