@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '../../lib/supabaseClient'
+import { useAuth } from '../../context/AuthContext'
 
 const FORM_VACIO = {
   fecha: new Date().toISOString().slice(0, 10),
@@ -8,6 +9,7 @@ const FORM_VACIO = {
 }
 
 export default function Produccion() {
+  const { esAdmin } = useAuth()
   const [producciones, setProducciones] = useState([])
   const [recetas, setRecetas] = useState([])
   const [cargando, setCargando] = useState(true)
@@ -92,6 +94,20 @@ export default function Produccion() {
 
     setUltimoResultado(data)
     setForm({ ...FORM_VACIO, fecha: form.fecha })
+    cargarDatos()
+  }
+
+  async function handleEliminar(produccion) {
+    const confirmar = window.confirm(
+      `¿Eliminar esta producción de "${produccion.productos?.nombre}"? Ojo: esto NO revierte automáticamente el stock de insumos consumidos ni el stock de producto sumado — ajústalos manualmente en Catálogos después de borrar.`
+    )
+    if (!confirmar) return
+
+    const { error } = await supabase.from('producciones').delete().eq('id', produccion.id)
+    if (error) {
+      setError('No se pudo eliminar: ' + error.message)
+      return
+    }
     cargarDatos()
   }
 
@@ -209,6 +225,7 @@ export default function Produccion() {
                 <th className="px-4 py-3 font-medium">Bandejas</th>
                 <th className="px-4 py-3 font-medium">Costo total</th>
                 <th className="px-4 py-3 font-medium">Costo/bandeja</th>
+                {esAdmin && <th className="px-4 py-3 font-medium"></th>}
               </tr>
             </thead>
             <tbody>
@@ -229,6 +246,16 @@ export default function Produccion() {
                   <td className="px-4 py-3 text-mama-gray">
                     ${Number(p.costo_por_bandeja).toLocaleString('es-CO')}
                   </td>
+                  {esAdmin && (
+                    <td className="px-4 py-3 text-right">
+                      <button
+                        onClick={() => handleEliminar(p)}
+                        className="text-mama-maroon-500 hover:underline text-xs"
+                      >
+                        Eliminar
+                      </button>
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '../../lib/supabaseClient'
+import { useAuth } from '../../context/AuthContext'
 
 const FORM_VACIO = {
   fecha: new Date().toISOString().slice(0, 10),
@@ -10,6 +11,7 @@ const FORM_VACIO = {
 }
 
 export default function Compras() {
+  const { esAdmin } = useAuth()
   const [compras, setCompras] = useState([])
   const [insumos, setInsumos] = useState([])
   const [cargando, setCargando] = useState(true)
@@ -100,6 +102,20 @@ export default function Compras() {
       `Compra registrada. El costo de "${insumoSeleccionado?.nombre}" y su stock ya se actualizaron automáticamente.`
     )
     setForm({ ...FORM_VACIO, fecha: form.fecha })
+    cargarDatos()
+  }
+
+  async function handleEliminar(compra) {
+    const confirmar = window.confirm(
+      `¿Eliminar esta compra de "${compra.insumos?.nombre}"? Ojo: esto NO revierte automáticamente el stock ni el costo que esta compra actualizó — si es necesario, ajústalos manualmente en Catálogos → Insumos después de borrar.`
+    )
+    if (!confirmar) return
+
+    const { error } = await supabase.from('compras').delete().eq('id', compra.id)
+    if (error) {
+      setError('No se pudo eliminar: ' + error.message)
+      return
+    }
     cargarDatos()
   }
 
@@ -249,6 +265,7 @@ export default function Compras() {
                 <th className="px-4 py-3 font-medium">Costo unitario</th>
                 <th className="px-4 py-3 font-medium">Total</th>
                 <th className="px-4 py-3 font-medium">Proveedor</th>
+                {esAdmin && <th className="px-4 py-3 font-medium"></th>}
               </tr>
             </thead>
             <tbody>
@@ -270,6 +287,16 @@ export default function Compras() {
                     ${Number(c.costo_total).toLocaleString('es-CO')}
                   </td>
                   <td className="px-4 py-3 text-mama-gray">{c.proveedor || '—'}</td>
+                  {esAdmin && (
+                    <td className="px-4 py-3 text-right">
+                      <button
+                        onClick={() => handleEliminar(c)}
+                        className="text-mama-maroon-500 hover:underline text-xs"
+                      >
+                        Eliminar
+                      </button>
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>
